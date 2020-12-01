@@ -3,7 +3,7 @@ import Alert from 'react-bootstrap/Alert';
 import './App.css';
 import Navbar from './components/Navbar'
 import Home from './components/Home'
-import Menu from './components/Menu'
+import Menu from './components/menu/Menu'
 import {
   BrowserRouter as Router,
   Switch,

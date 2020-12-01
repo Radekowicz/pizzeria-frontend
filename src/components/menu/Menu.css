@@ -1,0 +1,12 @@
+.container {
+  display: flex;
+}
+.menu-container {
+  flex: 0 0 50%;
+}
+.cart-container {
+  flex: 1;
+  margin-left: 50px;
+}
+.cart {
+}
