@@ -8,5 +8,9 @@
   flex: 1;
   margin-left: 50px;
 }
-.cart {
+
+.order-popup {
+  padding: 50px;
+  padding-left: 100px;
+  padding-right: 100px;
 }
