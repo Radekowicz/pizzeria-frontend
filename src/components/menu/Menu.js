@@ -158,17 +158,19 @@ function Menu() {
                                             rows={2} 
                                             value={orderNotes[index]} 
                                             onChange={({target:{value}}) => {
-                                                let newArr = orderNotes
-                                                console.log(orderNotes)
+                                                let newArr = [...orderNotes]
                                                 newArr[index] = value
-                                                setTableNumber(newArr)
-                                                console.log(orderNotes)
+                                                setOrderNotes(newArr)
                                             }}/>
                                         </td>
                                         <td>
                                             <Button variant="danger" onClick={() => {
-                                                setShoppingCart(shoppingCart.filter(item => item !== shoppingCart[index])) //(BUG)deletes all same items
-                                                setOrderNotes(orderNotes.filter(item => item !== orderNotes[index])) //(BUG)deletes all same items
+                                                let tempShoppingCart = [...shoppingCart]
+                                                tempShoppingCart.splice(index, 1)                                                
+                                                setShoppingCart(tempShoppingCart)
+                                                let tempOrderNotes = [...orderNotes]
+                                                tempOrderNotes.splice(index, 1)
+                                                setOrderNotes(tempOrderNotes)
                                             }}>
                                                 <ImCross/>
                                             </Button>
