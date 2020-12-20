@@ -91,10 +91,10 @@ function Menu() {
     const [orderValue, setOrderValue] = useState()
     const [orderNotes, setOrderNotes] = useState([])
 
+    useEffect(() => {
+        getMenu()
+      }, [])
 
-    // useEffect(() => {
-    //     fillNotes()
-    // }, [])
 
 
     const orderButtonClick = () => {
@@ -102,6 +102,8 @@ function Menu() {
         console.log(tableNumer)
         sendOrder()
         setPopupOpen(false)
+        getMenu()
+
     }
 
     const sendOrder = async () => {
@@ -109,16 +111,16 @@ function Menu() {
     }
 
     const getMenu = async () => {
-        const response = await fetch(`/products`);
+        const response = await fetch(`/menu`);
         const data = await response.json();
         console.log(data)
         const menu = [];
         data.map(item => {
             menu.push({
-                productName: item.productName,
-                ingredients: item.ingredients,
-                size: item.size,
-                price: item.price
+                productName: item[1],
+                ingredients: item[7],
+                size: item[5] + " " + item[6],
+                price: item[3] + " zł"
             })
         })
         setMenuItems(menu)
