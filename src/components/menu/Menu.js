@@ -104,8 +104,24 @@ function Menu() {
         setPopupOpen(false)
     }
 
-    const sendOrder = () => {
+    const sendOrder = async () => {
         //POST to database
+    }
+
+    const getMenu = async () => {
+        const response = await fetch(`/products`);
+        const data = await response.json();
+        console.log(data)
+        const menu = [];
+        data.map(item => {
+            menu.push({
+                productName: item.productName,
+                ingredients: item.ingredients,
+                size: item.size,
+                price: item.price
+            })
+        })
+        setMenuItems(menu)
     }
 
     const calcOrderValue = () => {
