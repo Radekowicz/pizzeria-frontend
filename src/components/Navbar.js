@@ -13,8 +13,7 @@ function MyNavbar() {
                 <Nav.Link as={Link} to="/menu">Menu</Nav.Link>
             </Nav>
             <Form inline>
-                <Button variant="outline-secondary" className="mr-sm-2" >Register</Button>
-                <Button variant="secondary">Log In</Button>
+                <Nav.Link as={Link} to="/login">Log In</Nav.Link>
             </Form>
         </Navbar.Collapse>
         </Navbar>

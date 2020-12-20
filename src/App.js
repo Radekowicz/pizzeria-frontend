@@ -2,35 +2,37 @@ import React, { Component } from 'react';
 import Alert from 'react-bootstrap/Alert';
 import './App.css';
 import Navbar from './components/Navbar'
-import Home from './components/Home'
+import Home from './components/home/Home'
 import Menu from './components/menu/Menu'
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
-} from "react-router-dom";
+import Login from './components/login/Login'
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import ContextProvider from './contexts/Context'
+
 
 
 function App() {
   return (
-    <Router>
-    <div className="App">
-      
-        <Navbar/>
-        <Switch>
-          <Route path="/home">
-            <Home />
-          </Route>
-          <Route path="/menu">
-            <Menu />
-          </Route>
-          <Route path="/">
-            <Home />
-          </Route>
-        </Switch>
-    </div>
-    </Router>  
+    <ContextProvider>
+      <Router>
+      <div className="App">
+          <Navbar/>
+          <Switch>
+          <Route path="/login">
+              <Login />
+            </Route>
+            <Route path="/home">
+              <Home />
+            </Route>
+            <Route path="/menu">
+              <Menu />
+            </Route>
+            <Route path="/">
+              <Home />
+            </Route>
+          </Switch>
+      </div>
+      </Router> 
+    </ContextProvider>
     );
 }
 

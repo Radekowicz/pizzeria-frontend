@@ -1,0 +1,17 @@
+.containerr {
+  background-image: url(./pizza-background.jpg);
+  background-size: cover;
+  min-height: 100vh;
+  display: flex;
+  margin: 0;
+}
+
+.form {
+  text-align: left;
+  margin: auto;
+  margin-top: 40px;
+  width: 400px;
+  border: 2px solid grey;
+  border-radius: 5px;
+  padding: 20px;
+}
