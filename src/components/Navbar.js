@@ -1,8 +1,12 @@
-import React, {Component} from 'react';
+import React, {useContext} from 'react';
 import { Navbar, Nav, NavItem, Form, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { Context } from '../contexts/Context';
 
 function MyNavbar() {
+
+    const { logged, setLogged, user, setUser } = useContext(Context)
+
     return (
         <Navbar bg="light" expand="lg">
         <Navbar.Brand as={Link} to="/home">Pizzeria</Navbar.Brand>
@@ -12,8 +16,12 @@ function MyNavbar() {
                 <Nav.Link as={Link} to="/home">Home</Nav.Link>
                 <Nav.Link as={Link} to="/menu">Menu</Nav.Link>
             </Nav>
+
             <Form inline>
-                <Nav.Link as={Link} to="/login">Log In</Nav.Link>
+                {logged === false 
+                ? <Nav.Link as={Link} to="/login">Log In</Nav.Link>
+                : <Nav.Link as={Link} to="/user">{user}</Nav.Link>
+                }
             </Form>
         </Navbar.Collapse>
         </Navbar>

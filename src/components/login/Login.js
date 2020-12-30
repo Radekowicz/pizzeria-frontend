@@ -10,17 +10,35 @@ function Login() {
     const [typedNickname, setTypedNickname] = useState()
     const [typedPassword, setTypedPassword] = useState()
     const history = useHistory()
-    const { user, setUser } = useContext(Context)
+    const { user, setUser, setLogged } = useContext(Context)
 
     const checkLogin = async () => {
-        const response = await fetch(`/employees?nickname=${typedNickname}&password=${typedPassword}`);
-        const data = await response.json();
-        
+        await fetch(`/user`, {
+            method: "POST",
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                nickname: typedNickname,
+                password: typedPassword
+            })
+        })
+
+        const response = await fetch(`/user`);
+        const isCorrect = await response.json();
+        console.log(isCorrect)
+        return isCorrect
     }
 
 
+
+
     const onClick = () => {
-        if (typedNickname === "a" && typedPassword === "s") {
+
+        if (checkLogin) {
+            setLogged(true)
+            setUser(typedNickname)
             history.push("/home");
         }
     }

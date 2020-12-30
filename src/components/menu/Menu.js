@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Table, Button, Form } from 'react-bootstrap';
 import { FiShoppingCart } from 'react-icons/fi';
 import { ImCross } from 'react-icons/im';
 import './Menu.css'
 import Popup from 'reactjs-popup';
 import "reactjs-popup/dist/index.css";
+import dayjs from 'dayjs'
+import { Context } from '../../contexts/Context';
 
 
 const menuColumns = [
@@ -90,6 +92,9 @@ function Menu() {
     const [tableNumer, setTableNumber] = useState(tables[0])
     const [orderValue, setOrderValue] = useState()
     const [orderNotes, setOrderNotes] = useState([])
+    const [billId, setBillId] = useState("999")
+    const { user, setUser } = useContext(Context)
+
 
     useEffect(() => {
         getMenu()
@@ -103,11 +108,36 @@ function Menu() {
         sendOrder()
         setPopupOpen(false)
         getMenu()
-
     }
 
     const sendOrder = async () => {
-        //POST to database
+
+        var jsonArr = [];
+        shoppingCart.forEach((product, index) => {
+            jsonArr.push({
+                status: "Ordered",
+                comment: orderNotes[index],
+                orderDate: dayjs(),
+                billId: billId,
+                productId: product.productId,
+                cookId: null,
+                })
+        })
+
+        await fetch(`/addorder`, {
+            method: "POST",
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                order: jsonArr,
+                waiter: user,
+                table: tableNumer,
+                clientName: name
+            })
+        })
+
     }
 
     const getMenu = async () => {
@@ -120,7 +150,10 @@ function Menu() {
                 productName: item[1],
                 ingredients: item[7],
                 size: item[5] + " " + item[6],
-                price: item[3] + " zł"
+                price: item[3] + " zł",
+                productId: item[0],
+                quantity: item[2],
+                type: item[4]
             })
         })
         setMenuItems(menu)
