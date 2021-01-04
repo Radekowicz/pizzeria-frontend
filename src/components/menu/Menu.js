@@ -115,12 +115,9 @@ function Menu() {
         var jsonArr = [];
         shoppingCart.forEach((product, index) => {
             jsonArr.push({
-                status: "Ordered",
                 comment: orderNotes[index],
                 orderDate: dayjs(),
-                billId: billId,
                 productId: product.productId,
-                cookId: null,
                 })
         })
 

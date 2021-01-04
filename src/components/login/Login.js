@@ -13,10 +13,11 @@ function Login() {
     const { user, setUser, setLogged } = useContext(Context)
 
     const checkLogin = async () => {
-        await fetch(`/user`, {
+        console.log("check login")
+        const response = await fetch(`/user`, {
             method: "POST",
             headers: {
-              Accept: "application/json",
+              "Accept": "application/json",
               "Content-Type": "application/json",
             },
             body: JSON.stringify({
@@ -25,8 +26,9 @@ function Login() {
             })
         })
 
-        const response = await fetch(`/user`);
-        const isCorrect = await response.json();
+        // const response = await fetch(`/user`);
+        //console.log(response)
+        const isCorrect = await response.json()
         console.log(isCorrect)
         return isCorrect
     }
@@ -35,12 +37,13 @@ function Login() {
 
 
     const onClick = () => {
-
-        if (checkLogin) {
-            setLogged(true)
-            setUser(typedNickname)
-            history.push("/home");
-        }
+        checkLogin().then((isCorrect) => {
+            if (isCorrect === true) {
+                setLogged(true)
+                setUser(typedNickname)
+                history.push("/home");
+            }
+        })
     }
 
     return (
