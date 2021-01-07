@@ -69,7 +69,7 @@ function Login() {
                         setTypedPassword(value)
                     }}/>
                 </Form.Group>
-                <Button variant="primary" type="submit" onClick={onClick}>
+                <Button variant="primary" onClick={onClick}>
                     Submit
                 </Button>
                 </Form>

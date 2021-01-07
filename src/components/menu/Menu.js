@@ -116,7 +116,6 @@ function Menu() {
         shoppingCart.forEach((product, index) => {
             jsonArr.push({
                 comment: orderNotes[index],
-                orderDate: dayjs(),
                 productId: product.productId,
                 })
         })
