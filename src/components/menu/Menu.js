@@ -57,14 +57,25 @@ function Menu() {
     const [orderNotes, setOrderNotes] = useState([])
     const [billId, setBillId] = useState("999")
     const { user, setUser } = useContext(Context)
-    const [popupNoResp, setPopupNoResp] = useState(false) 
+    const {logged, setLogged} = useContext(Context)
+    const [popupNoResp, setPopupNoResp] = useState(false)
+    const [popupNotLogged, setPopupNotLogged] = useState(false) 
 
     useEffect(() => {
         getMenu()
       }, [])
 
 
-
+    const buttonOrderHandler = () => {
+        if(logged == true) {
+            calcOrderValue()
+            setPopupOpen(true)
+        }
+        else {
+            setPopupNotLogged(true)
+        }
+    }
+    
     const orderButtonClick = () => {
         console.log(name)
         console.log(tableNumer)
@@ -135,15 +146,22 @@ function Menu() {
         <div className="all-container">
             <Popup modal 
             open={popupNoResp} 
-//             position="right center"
             onClose = {() => {
                 setPopupNoResp(false)
                 history.push("/home")
                 }}
             >
-            <div className="noresponse-popup">
-                Serwer nie odpowiada! Proszę spróbować ponownie za jakiś czas.
-            </div>
+                <div className="noresponse-popup">
+                    Serwer nie odpowiada! Proszę spróbować ponownie za jakiś czas.
+                </div>
+            </Popup>
+            <Popup modal 
+            open={popupNotLogged} 
+            onClose = {() => {setPopupNotLogged(false)}}
+            >
+                <div className="notlogged-popup">
+                    Opcja dostępna tylko po zalogowaniu!
+                </div>
             </Popup>
             <div className="container">
                 <div className="menu-container"> 
@@ -206,10 +224,9 @@ function Menu() {
                             </tbody>
                         </Table>
                     </div>
-                    <Button onClick={() => {
-                        calcOrderValue()
-                        setPopupOpen(true)
-                        }}
+                    <Button 
+                    disabled = {shoppingCart.length == 0}
+                    onClick={buttonOrderHandler}
                     >
                         Złóż zamówienie
                     </Button>
