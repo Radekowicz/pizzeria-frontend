@@ -7,7 +7,7 @@ import Popup from 'reactjs-popup';
 import "reactjs-popup/dist/index.css";
 import dayjs from 'dayjs'
 import { Context } from '../../contexts/Context';
-
+import { useHistory } from 'react-router-dom'
 
 const menuColumns = [
     {
@@ -47,45 +47,8 @@ const tables =["1", "2", "3", "4", "5", "6", "7", "8", "9"]
 
 
 function Menu() {
-
-    const [menuItems, setMenuItems] = useState([
-        {
-            productName: "Margheritta",
-            ingredients: "sos, ser",
-            size: "30 cm",
-            price: "24 zł"
-        },
-        {
-            productName: "Hawajska",
-            ingredients: "sos, ser, szynka, ananas",
-            size: "40 cm",
-            price: "30 zł"
-        },
-        {
-            productName: "Capri",
-            ingredients: "sos, ser, szynka, pieczarki",
-            size: "40 cm",
-            price: "31 zł"
-        },
-        {
-            productName: "Pepperoni",
-            ingredients: "sos, ser, salami",
-            size: "30 cm",
-            price: "24 zł"
-        },
-        {
-            productName: "Farmerska",
-            ingredients: "sos, ser, kurczak, papryka, kukurydza",
-            size: "40 cm",
-            price: "30 zł"
-        },
-        {
-            productName: "Wege",
-            ingredients: "sos, ser, cebula, pieczarki, oliwki",
-            size: "40 cm",
-            price: "31 zł"
-        }
-    ])
+    const history = useHistory()
+    const [menuItems, setMenuItems] = useState([])
     const [shoppingCart, setShoppingCart] = useState([])
     const [popupOpen, setPopupOpen] = useState(false)
     const [name, setName] = useState('')
@@ -94,7 +57,7 @@ function Menu() {
     const [orderNotes, setOrderNotes] = useState([])
     const [billId, setBillId] = useState("999")
     const { user, setUser } = useContext(Context)
-
+    const [popupNoResp, setPopupNoResp] = useState(false) 
 
     useEffect(() => {
         getMenu()
@@ -137,7 +100,11 @@ function Menu() {
     }
 
     const getMenu = async () => {
-        const response = await fetch(`/menu`);
+        const response = await fetch(`/menu`)
+        if(!(response.status >= 200 && response.status < 300)) {
+                setPopupNoResp(true);
+                return;
+            };
         const data = await response.json();
         console.log(data)
         const menu = [];
@@ -166,6 +133,18 @@ function Menu() {
 
     return (
         <div className="all-container">
+            <Popup modal 
+            open={popupNoResp} 
+//             position="right center"
+            onClose = {() => {
+                setPopupNoResp(false)
+                history.push("/home")
+                }}
+            >
+            <div className="noresponse-popup">
+                Serwer nie odpowiada! Proszę spróbować ponownie za jakiś czas.
+            </div>
+            </Popup>
             <div className="container">
                 <div className="menu-container"> 
                     <Table bordered hover >
