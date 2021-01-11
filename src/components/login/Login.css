@@ -15,3 +15,12 @@
   border-radius: 5px;
   padding: 20px;
 }
+
+.divFailedLogin {
+  padding: 15px;
+  padding-left: 100px;
+  padding-right: 100px;
+  color: white;
+  text-align: center;
+  background-color: #dc3545;
+}

@@ -9,6 +9,7 @@ function Login() {
 
     const [typedNickname, setTypedNickname] = useState()
     const [typedPassword, setTypedPassword] = useState()
+    const [failedLogin, setFailedLogin] = useState(false)
     const history = useHistory()
     const { user, setUser, setLogged } = useContext(Context)
 
@@ -25,7 +26,9 @@ function Login() {
                 password: typedPassword
             })
         })
-
+        if(!(response.status >= 200 && response.status < 300)) {
+            return false;
+        };
         // const response = await fetch(`/user`);
         //console.log(response)
         const isCorrect = await response.json()
@@ -44,11 +47,18 @@ function Login() {
                 setUser(typedNickname)
                 history.push("/home");
             }
+            else
+                setFailedLogin(true);
         })
     }
 
     return (
         <div>
+            {failedLogin &&
+                <div className="divFailedLogin">
+                    Nie udało się zalogować. Spróbuj ponownie!
+                </div>
+            }
             <div className="form">
                 <Form onSubmit={onFormSubmit}>
                 <Form.Group controlId="formBasicEmail">
