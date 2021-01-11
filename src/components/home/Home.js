@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import "./Home.css"
-import pizza from './pizza.jpg'
+import pizza from './pizza.png'
 function Home() {
 
     
