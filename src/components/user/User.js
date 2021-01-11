@@ -11,8 +11,6 @@ function User() {
 
     const { user, setUser, setLogged } = useContext(Context)
     const history = useHistory()
-    
-    console.log("dupa");
 
     const logout =  () => {
         setUser("JS")
@@ -21,14 +19,12 @@ function User() {
     }
     
     return (
-        <div>
-            <div className="useroptions">
-                <h1>Opcje użytkownika</h1>
-                <br />
-                <Button onClick={logout} variant="primary">
-                    Wyloguj
-                </Button>
-            </div>
+        <div className="useroptions">
+            <h1>Opcje użytkownika</h1>
+            <br />
+            <Button onClick={logout} variant="primary">
+                Wyloguj
+            </Button>
         </div>
     )
 }

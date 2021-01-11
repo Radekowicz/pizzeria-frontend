@@ -1,0 +1,10 @@
+.pagenotfound {
+  width: 50%;
+  
+  margin: auto;
+  margin-top: 40px;
+  min-width: 400px;
+  border: 2px solid grey;
+  border-radius: 5px;
+  padding: 20px;
+}

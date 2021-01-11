@@ -6,7 +6,8 @@ import Home from './components/home/Home'
 import Menu from './components/menu/Menu'
 import Login from './components/login/Login'
 import User from './components/user/User'
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import Notfound from './components/notfound/Notfound'
+import { BrowserRouter as Router, Switch, Route, Redirect, Link } from "react-router-dom";
 import ContextProvider from './contexts/Context'
 
 
@@ -22,21 +23,15 @@ function App() {
       <div className="App">
           <Navbar/>
           <Switch>
-            <Route path="/login">
-              <Login />
+            <Route exact path="/">
+               <Redirect to="/home" />
             </Route>
-            <Route path="/user">
-              <User />
-            </Route>
-            <Route path="/home">
-              <Home />
-            </Route>
-            <Route path="/menu">
-              <Menu />
-            </Route>
-            <Route path="/">
-              <Home />
-            </Route>
+            <Route exact path="/login" component={Login} />
+            <Route exact path="/user"  component={User} />
+            <Route exact path="/home"  component={Home} />
+            <Route exact path="/menu"  component={Menu} />
+            <Route exact path="/404"   component={Notfound} />
+            <Redirect to="/404" />
           </Switch>
       </div>
       </Router> 
