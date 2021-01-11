@@ -54,7 +54,8 @@ function Login() {
                 <Form.Group controlId="formBasicEmail">
                     <Form.Label>Nickname</Form.Label>
                     <Form.Control 
-                    type="login" 
+                    type="text" 
+                    name="username"
                     placeholder="Enter nickname"                
                     onChange={({target:{value}}) => {
                         setTypedNickname(value)
