@@ -18,8 +18,7 @@
 
 .divFailedLogin {
   padding: 15px;
-  padding-left: 100px;
-  padding-right: 100px;
+  margin-top: 40px;
   color: white;
   text-align: center;
   background-color: #dc3545;

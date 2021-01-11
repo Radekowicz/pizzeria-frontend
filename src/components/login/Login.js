@@ -60,29 +60,30 @@ function Login() {
                 </div>
             }
             <div className="form">
+                <h1>Zaloguj się</h1>
                 <Form onSubmit={onFormSubmit}>
                 <Form.Group controlId="formBasicEmail">
-                    <Form.Label>Nickname</Form.Label>
+                    <Form.Label>Nazwa użytkownika</Form.Label>
                     <Form.Control 
                     type="text" 
                     name="username"
-                    placeholder="Enter nickname"                
+                    placeholder="Login"
                     onChange={({target:{value}}) => {
                         setTypedNickname(value)
                     }}/>
                 </Form.Group>
 
                 <Form.Group controlId="formBasicPassword">
-                    <Form.Label>Password</Form.Label>
+                    <Form.Label>Hasło</Form.Label>
                     <Form.Control 
                     type="password" 
-                    placeholder="Password"
+                    placeholder="Hasło"
                     onChange={({target:{value}}) => {
                         setTypedPassword(value)
                     }}/>
                 </Form.Group>
                 <Button variant="primary" type="submit">
-                    Submit
+                    Zaloguj
                 </Button>
                 </Form>
             </div>
