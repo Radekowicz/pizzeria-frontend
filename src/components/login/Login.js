@@ -36,7 +36,8 @@ function Login() {
 
 
 
-    const onClick = () => {
+    const onFormSubmit = (e) => {
+        e.preventDefault()
         checkLogin().then((isCorrect) => {
             if (isCorrect === true) {
                 setLogged(true)
@@ -49,7 +50,7 @@ function Login() {
     return (
         <div>
             <div className="form">
-                <Form>
+                <Form onSubmit={onFormSubmit}>
                 <Form.Group controlId="formBasicEmail">
                     <Form.Label>Nickname</Form.Label>
                     <Form.Control 
@@ -69,7 +70,7 @@ function Login() {
                         setTypedPassword(value)
                     }}/>
                 </Form.Group>
-                <Button variant="primary" onClick={onClick}>
+                <Button variant="primary" type="submit">
                     Submit
                 </Button>
                 </Form>
