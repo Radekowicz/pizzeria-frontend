@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useEffect } from 'react';
 import Alert from 'react-bootstrap/Alert';
 import './App.css';
 import Navbar from './components/Navbar'
@@ -11,6 +11,10 @@ import ContextProvider from './contexts/Context'
 
 
 function App() {
+    useEffect(() => {
+        document.title = "Pizzeria Politechniki Wrocławskiej";
+    }, []);
+    
   return (
     <ContextProvider>
       <Router>
