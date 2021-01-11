@@ -5,6 +5,7 @@ import Navbar from './components/Navbar'
 import Home from './components/home/Home'
 import Menu from './components/menu/Menu'
 import Login from './components/login/Login'
+import User from './components/user/User'
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import ContextProvider from './contexts/Context'
 
@@ -21,8 +22,11 @@ function App() {
       <div className="App">
           <Navbar/>
           <Switch>
-          <Route path="/login">
+            <Route path="/login">
               <Login />
+            </Route>
+            <Route path="/user">
+              <User />
             </Route>
             <Route path="/home">
               <Home />
