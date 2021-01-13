@@ -1,13 +1,12 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { Table, Button, Form } from 'react-bootstrap';
+import React, { useContext, useEffect, useState } from 'react';
+import { Button, Form, Table } from 'react-bootstrap';
 import { FiShoppingCart } from 'react-icons/fi';
 import { ImCross } from 'react-icons/im';
-import './Menu.css'
+import { useHistory } from 'react-router-dom';
 import Popup from 'reactjs-popup';
 import "reactjs-popup/dist/index.css";
-import dayjs from 'dayjs'
 import { Context } from '../../contexts/Context';
-import { useHistory } from 'react-router-dom'
+import './Menu.css';
 
 const menuColumns = [
     {
@@ -137,7 +136,7 @@ function Menu() {
         var value = 0
         shoppingCart.forEach(item => {
             var price = item.price.split(" ")
-            value += parseInt(price[0])
+            value += parseFloat(price[0])
         })
         setOrderValue(value)
     }
@@ -165,6 +164,7 @@ function Menu() {
             </Popup>
             <div className="container">
                 <div className="menu-container"> 
+                    <h1>MENU</h1>
                     <Table bordered hover >
                         <thead>
                             <tr>
@@ -186,6 +186,7 @@ function Menu() {
                 </div>
                 <div className="cart-container">
                     <div className="cart">
+                        <h1>ZAMÓWIENIE</h1>
                         <Table bordered hover >
                             {/* <thead>
                                 <tr>
